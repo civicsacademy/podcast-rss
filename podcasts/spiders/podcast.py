@@ -17,6 +17,12 @@ class PodcastSpider(scrapy.Spider):
         'http://www.civicsacademy.co.za/podcasts/page/1',
         'http://www.civicsacademy.co.za/podcasts/page/2',
         'http://www.civicsacademy.co.za/podcasts/page/3',
+        'http://www.civicsacademy.co.za/podcasts/?category=introduction-to-democracy',
+        'http://www.civicsacademy.co.za/podcasts/?category=justice-human-rights',
+        'http://www.civicsacademy.co.za/podcasts/?category=separation-of-powers',
+        'http://www.civicsacademy.co.za/podcasts/?category=political-parties',
+        'http://www.civicsacademy.co.za/podcasts/?category=elections',
+        'http://www.civicsacademy.co.za/podcasts/?category=economics',
     ]
 
     def parse(self, response):
