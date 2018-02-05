@@ -37,7 +37,7 @@ class PodcastSpider(scrapy.Spider):
 
         r = requests.get(uri, stream=True)
         local_filename = uri.split('/')[-1]
-        with open('../audio/' + local_filename, 'wb') as f:
+        with open('content/audio/' + local_filename, 'wb') as f:
             for chunk in r.iter_content(chunk_size=1024):
                 if chunk: # filter out keep-alive new chunks
                     f.write(chunk)

@@ -6,17 +6,22 @@ import os
 from mutagen.mp3 import MP3
 
 fg = FeedGenerator()
+fg.load_extension('podcast')
+
 fg.id('http://civicsacademy.co.za')
 fg.title('Civics Academy - South Africa')
-fg.author( {'name':'Civics Academy','email':'info@civicsacademy.co.za'} )
+fg.author(
+    name='Civics Academy',
+    email='info@civicsacademy.co.za',
+    uri='http://civicsacademy.co.za',
+)
+fg.podcast.itunes_author('Civics Academy')
 fg.link( href='http://www.civicsacademy.co.za/', rel='alternate' )
 fg.logo('https://civicsacademy.whatcanido.org.za/logo.png')
 fg.subtitle('Cultivating democracy through civic action')
 fg.link( href='http://civicsacademy.co.za', rel='self' )
 fg.language('en')
 fg.description('Aiming to inform and to strengthen democratic values and responsible citizenship. Civics Academy covers educational content related to democracy, governance, elections, political parties, the justice system, the Constitution, economics, civil society, human rights and the environment.')
-
-fg.load_extension('podcast')
 
 cats = [
     {
@@ -30,7 +35,7 @@ fg.podcast.itunes_explicit('clean')
 with open('podcasts.jsonlines') as podcastfile:
     for jsonline in podcastfile:
         podcast = json.loads(jsonline)
-        local_path = '../' + podcast['file']
+        local_path = 'content/' + podcast['file']
         size_bytes = os.path.getsize(local_path)
         audio = MP3(local_path)
         uri = 'https://civicsacademy.whatcanido.org.za/' + podcast['file']
@@ -46,4 +51,4 @@ with open('podcasts.jsonlines') as podcastfile:
         fe.podcast.itunes_duration(audio.info.length)
 
 fg.rss_str(pretty=True)
-fg.rss_file('podcasts.xml')
+fg.rss_file('content/podcasts.xml')
